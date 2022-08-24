@@ -8,8 +8,9 @@ h1 {
 }
 
 footer {
-  padding-top: 20px;
+  padding-top: 15px;
   text-align: right;
+  font-size: 15px;
 }
 
 .container {
@@ -137,4 +138,13 @@ footer {
   cursor: pointer;
   color: #d59bf6;
   text-shadow: 5px 5px 10px rgba(152, 150, 241, 0.4);
+}
+
+.gitHubLink {
+  text-decoration: none;
+  color: #9896f1;
+}
+
+.gitHubLink:hover {
+  color: #d59bf6;
 }
