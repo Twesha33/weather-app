@@ -4,11 +4,125 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="src/style.css" />
     <title>Weather App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="src/style.css" />
   </head>
   <body>
-    <h1>Hello Git</h1>
+    <div class="container">
+      <div class="app p-3">
+        <div class="mb-5">
+          <form class="row" id="city-form">
+            <div class="col-8">
+              <input
+                type="text"
+                class="form-control"
+                id="search-input"
+                placeholder="e.g. Amsterdam"
+              />
+            </div>
+            <div class="col-2 px-1">
+              <button type="submit" class="btn btn-primary w-100 changeCityBtn">
+                Search
+              </button>
+            </div>
+            <div class="col-2 px-1">
+              <button
+                type="submit"
+                class="btn btn-primary w-100 currentCityBtn"
+                id="current-city-btn"
+              >
+                Current
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <h1 class="cityName"></h1>
+
+        <div class="currentWeather p-2 mx-auto rounded-5">
+          <div class="row">
+            <div class="col-3">
+              <span class="sunEmoji">☀️</span>
+            </div>
+            <div class="col-4">
+              <span class="highTemp" id="temp-today"></span>
+              <a href="#" class="celcius">°C</a>
+              <span class="divider">|</span>
+              <a href="#" class="fahrenheit">°F</a>
+            </div>
+            <div class="col-5">
+              <div class="row">
+                <div class="col-8">Feels like:</div>
+                <div class="col-4 tempPerceived"></div>
+                <div class="col-8">Wind:</div>
+                <div class="col-4" id="wind-speed"></div>
+                <div class="col-8">Humidity:</div>
+                <div class="col-4" id="humidity-perc"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-5">
+            <span class="forecast"></span><br />
+            <span class="day-time">Sunday 9:47</span>
+          </div>
+        </div>
+
+        <div class="row text-center">
+          <div class="col-2 prediction">
+            <span class="days">Monday</span>
+            <span class="weatherEmoji">⛈️</span>
+            <span class="highTemp"> 33°C</span>
+            <span class="slashDivider">/</span>
+            <span class="lowerTemp">13°C</span>
+          </div>
+          <div class="col-2 prediction">
+            <span class="days">Tuesday</span>
+            <span class="weatherEmoji">☀️</span>
+            <span class="highTemp"> 31°C</span>
+            <span class="slashDivider">/</span>
+            <span class="lowerTemp">17°C</span>
+          </div>
+          <div class="col-2 prediction">
+            <span class="days">Wednesday</span>
+            <span class="weatherEmoji">⛅</span>
+            <span class="highTemp"> 25°C</span>
+            <span class="slashDivider">/</span>
+            <span class="lowerTemp">15°C</span>
+          </div>
+          <div class="col-2 prediction">
+            <span class="days">Thursday</span>
+            <span class="weatherEmoji">☀️</span>
+            <span class="highTemp"> 27°C</span>
+            <span class="slashDivider">/</span>
+            <span class="lowerTemp">11°C</span>
+          </div>
+          <div class="col-2 prediction">
+            <span class="days">Friday</span>
+            <span class="weatherEmoji">🌦️</span>
+            <span class="highTemp"> 21°C </span>
+            <span class="slashDivider">/</span>
+            <span class="lowerTemp">10°C</span>
+          </div>
+        </div>
+        <footer>
+          <span class="coder">coded by Natasja Sluis</span>
+        </footer>
+      </div>
+    </div>
     <script src="src/script.js"></script>
   </body>
 </html>

@@ -1,4 +1,140 @@
+body {
+  font-size: 20px;
+  font-family: "Cousine", monospace;
+}
+
 h1 {
+  font-size: 40px;
+}
+
+footer {
+  padding-top: 20px;
+  text-align: right;
+}
+
+.container {
+  margin: auto;
+  padding: 0;
+  max-width: 900px;
+}
+
+.app {
+  border: rgba(232, 218, 239, 0.8) solid 2px;
+  margin-top: 60px;
+  background-color: rgba(213, 155, 246, 0.1);
+}
+
+.currentWeather {
+  border: #d59bf6 solid 2px;
+  margin-bottom: 40px;
+  position: relative;
+  width: 90%;
+}
+
+.cityName {
   text-align: center;
-  color: red;
+  font-family: "Poppins", sans-serif;
+}
+
+.sunEmoji {
+  font-size: 150px;
+  line-height: 1;
+  position: absolute;
+  top: -25px;
+  left: -25px;
+}
+
+.tempPerceived {
+  font-size: 20px;
+}
+
+.forecast {
+  font-size: 30px;
+  text-transform: capitalize;
+}
+
+.changeCityBtn {
+  background-color: #9896f1;
+  color: white;
+  border-color: #9896f1;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 200ms ease-in-out;
+}
+
+.changeCityBtn:hover {
+  background-color: #d59bf6;
+  border-color: #d59bf6;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.currentCityBtn {
+  background-color: #9896f1;
+  color: white;
+  border-color: #9896f1;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 200ms ease-in-out;
+}
+
+.currentCityBtn:hover {
+  background-color: #d59bf6;
+  border-color: #d59bf6;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.days {
+  text-decoration: underline;
+}
+
+.prediction {
+  border: #d59bf6 solid 1px;
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+  background-color: rgba(152, 150, 241, 0.1);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 200ms ease-in-out;
+}
+
+.prediction:hover {
+  background-color: rgba(152, 150, 241, 0.5);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.weatherEmoji {
+  font-size: 50px;
+}
+
+.highTemp {
+  font-size: 50px;
+  color: black;
+}
+
+.lowerTemp {
+  font-size: 30px;
+  color: grey;
+}
+
+.celcius,
+.fahrenheit,
+.divider {
+  font-size: 20px;
+  position: relative;
+  top: -20px;
+}
+
+.celcius,
+.fahrenheit {
+  text-decoration: none;
+  color: #9896f1;
+}
+
+.celcius:hover,
+.fahrenheit:hover {
+  cursor: pointer;
+  color: #d59bf6;
+  text-shadow: 5px 5px 10px rgba(152, 150, 241, 0.4);
 }
