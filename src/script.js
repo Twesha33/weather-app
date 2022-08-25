@@ -30,6 +30,7 @@ function padMinutes(minutes) {
 getFormattedTime();
 
 function displayWeather(response) {
+  console.log(response);
   let changeCity = response.data.name;
   let currentCountry = response.data.sys.country;
   document.querySelector(
@@ -50,6 +51,14 @@ function displayWeather(response) {
 
   let windSpeed = Math.round(response.data.wind.speed * 3.6);
   document.querySelector("#wind-speed").innerHTML = `${windSpeed}km/h`;
+
+  let weatherIcon = response.data.weather[0].icon;
+  document
+    .querySelector("#weather-today-icon")
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`
+    );
 }
 
 function searchCity(cityInput) {
