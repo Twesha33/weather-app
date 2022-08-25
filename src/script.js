@@ -27,6 +27,41 @@ function getFormattedTime() {
   date.innerHTML = `${day} ${hour}:${minutes}`;
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#weather-forecast");
+
+  let days = ["Sunday", "Monday", "Tuesday", "Thursday", "Friday"];
+
+  let forecastHTML = `<div class="row text-center">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+        <div class="col prediction">
+          <div class="days text-subtitle-3">${day}</div>
+          <img
+            src="https://openweathermap.org/img/wn/10d@2x.png"
+            alt="Weather Icon"
+            class="weatherEmoji"
+            id="weather-today-icon"
+          />
+          <div class="highTemp text-subtitle-1">33°C</div>
+          <div class="lowerTemp text-subtitle-2">13°C</div>
+        </div>
+      `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "d764fc53cc8918e14f2c2991dc43a40d";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function displayWeather(response) {
   let changeCity = response.data.name;
   let currentCountry = response.data.sys.country;
@@ -39,7 +74,7 @@ function displayWeather(response) {
 
   currentFeelTempCelsius = Math.round(response.data.main.feels_like);
   document.querySelector(
-    ".tempPerceived"
+    "#temp-perceived"
   ).innerHTML = `${currentFeelTempCelsius}°C`;
 
   let humidity = Math.round(response.data.main.humidity);
@@ -56,12 +91,14 @@ function displayWeather(response) {
     .querySelector("#weather-today-icon")
     .setAttribute(
       "src",
-      `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`
+      `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`
     );
 
   document
     .querySelector("#weather-today-icon")
     .setAttribute("alt", `${weatherDescription}`);
+
+  getForecast(response.data.coord);
 }
 
 function searchCity(cityInput) {
@@ -106,7 +143,7 @@ function setTempFahrenheit(event) {
   document.querySelector("#temp-today").innerHTML = Math.round(fahrenheitTemp);
   let fahrenheitTempFeel = Math.round((currentFeelTempCelsius * 9) / 5 + 32);
   document.querySelector(
-    ".tempPerceived"
+    "#temp-perceived"
   ).innerHTML = `${fahrenheitTempFeel}°F`;
 
   celsiusLink.classList.remove("active");
@@ -117,40 +154,11 @@ function setTempCelsius(event) {
   event.preventDefault();
   document.querySelector("#temp-today").innerHTML = currentTempCelsius;
   document.querySelector(
-    ".tempPerceived"
+    "#temp-perceived"
   ).innerHTML = `${currentFeelTempCelsius}°C`;
 
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
-}
-
-function displayForecast() {
-  let forecastElement = document.querySelector("#weather-forecast");
-
-  let days = ["Sunday", "Monday", "Tuesday", "Thursday", "Friday"];
-
-  let forecastHTML = `<div class="row text-center">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
-     <div class="col prediction">
-            <div class="days">${day}</div>
-            <img
-              src="http://openweathermap.org/img/wn/10d@2x.png"
-              alt="Weather Icon"
-              class="weatherEmoji"
-              id="weather-today-icon"
-            />
-            <div class="highTemp"> 33°C</div>
-            <span class="slashDivider">/</span>
-            <span class="lowerTemp">13°C</span>
-          </div>
-  `;
-  });
-
-  forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;
 }
 
 let currentTempCelsius = null;

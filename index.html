@@ -20,10 +20,11 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="src/style.css" />
   </head>
+
   <body>
-    <div class="container">
-      <div class="app p-3">
-        <div class="mb-5">
+    <div class="appContainer">
+      <div class="app p-4">
+        <div class="container mb-5">
           <form class="row" id="city-form">
             <div class="col-8">
               <input
@@ -33,12 +34,12 @@
                 placeholder="e.g. Amsterdam"
               />
             </div>
-            <div class="col-2 px-1">
+            <div class="col-2">
               <button type="submit" class="btn btn-primary w-100 changeCityBtn">
                 Search
               </button>
             </div>
-            <div class="col-2 px-1">
+            <div class="col-2">
               <button
                 type="submit"
                 class="btn btn-primary w-100 currentCityBtn"
@@ -52,21 +53,29 @@
 
         <h1 class="cityName"></h1>
 
-        <div class="currentWeather p-2 mx-auto rounded-5">
+        <div class="currentWeather mx-auto rounded-5 container">
           <div class="row">
             <div class="col-3">
-              <img src="#" alt="" class="todayEmoji" id="weather-today-icon" />
+              <div class="currentWeatherIconWrapper">
+                <img
+                  src="#"
+                  alt=""
+                  class="currentWeatherIcon"
+                  id="weather-today-icon"
+                />
+              </div>
             </div>
             <div class="col-4">
-              <span class="highTemp" id="temp-today"></span
-              ><a href="#" class="celsius active">°C</a
-              ><span class="divider">|</span
-              ><a href="#" class="fahrenheit">°F</a>
+              <span class="currentTemp text-display-1" id="temp-today"></span>
+              <div class="unitControls">
+                <a href="#" class="celsius active">°C</a
+                ><a href="#" class="fahrenheit">°F</a>
+              </div>
             </div>
             <div class="col-5">
               <div class="row">
                 <div class="col-8">Feels like:</div>
-                <div class="col-4 tempPerceived"></div>
+                <div class="col-4" id="temp-perceived"></div>
                 <div class="col-8">Wind:</div>
                 <div class="col-4" id="wind-speed"></div>
                 <div class="col-8">Humidity:</div>
@@ -76,24 +85,28 @@
           </div>
 
           <div class="text-center mt-5">
-            <span class="forecast"></span><br />
-            <span class="lastUpdated">Last updated:</span><br /><span
-              class="day-time"
-            ></span>
+            <span class="forecast text-subtitle-1"></span><br />
+            <span class="lastUpdated text-caption">Last updated:</span><br />
+            <span class="day-time"></span>
           </div>
         </div>
-        <div id="weather-forecast"></div>
-        <footer>
-          <a
-            href="https://github.com/Twesha33/weather-app"
-            target="_blank"
-            class="gitHubLink"
-            >Open-source code</a
-          >
-          <span class="coder">by Natasja Sluis</span>
-        </footer>
+
+        <div class="container">
+          <div id="weather-forecast"></div>
+        </div>
       </div>
+      <footer class="text-caption">
+        <a
+          href="https://github.com/Twesha33/weather-app"
+          target="_blank"
+          class="gitHubLink"
+        >
+          Open-source code
+        </a>
+        <span class="coder">by Natasja Sluis</span>
+      </footer>
     </div>
+
     <script src="src/script.js"></script>
   </body>
 </html>

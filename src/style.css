@@ -1,11 +1,33 @@
+/* 
+  color-primary:        #bc63e9
+  color-primary-active: #d383fc
+
+  color-text-emph:    rgba(0,0,0,0.85)
+  color-text:         rgba(0,0,0,0.67)
+  color-text-demp:    rgba(0,0,0,0.30)
+  
+  color-bg-darker:    #ca9fdf
+  color-bg-dark:      #d2afe4
+  color-bg:           #d9bae8
+  color-bg-light:     #e3cdee
+  color-bg-lighter:   #ead9f2
+
+  color-bg-body:      #f9f4fb
+*/
+
 body {
-  font-size: 20px;
+  font-size: 1rem;
   font-family: "Cousine", monospace;
-  background-color: rgba(213, 155, 246, 0.1);
+  background-color: #f9f4fb;
+  color: rgba(0, 0, 0, 0.67);
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  font-family: "Poppins", sans-serif;
+  color: rgba(0, 0, 0, 0.85);
 }
 
 footer {
@@ -14,135 +36,168 @@ footer {
   font-size: 15px;
 }
 
-.container {
+.form-control:focus {
+  border-color: #bc63e9;
+  box-shadow: 0 0 2px 4px rgba(188, 99, 233, 0.3);
+}
+
+.text-display-1 {
+  font-size: 4rem;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 1;
+}
+
+.text-display-2 {
+  font-size: 3rem;
+}
+
+.text-subtitle-1 {
+  font-size: 2rem;
+}
+
+.text-subtitle-2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.text-subtitle-3 {
+  font-size: 0.9rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.text-caption {
+  font-size: 0.85rem;
+}
+
+.appContainer {
   margin: auto;
   padding: 0;
   max-width: 900px;
 }
 
 .app {
-  border: rgba(183, 103, 224, 0.5) solid 2px;
   margin-top: 60px;
-  background-color: rgba(183, 103, 224, 0.5);
+  background-color: #ead9f2;
+  border: transparent solid 1px;
+  border-radius: 10px;
 }
 
 .currentWeather {
-  border: #bb5dea solid 2px;
+  background-color: #e3cdee;
   margin-bottom: 40px;
+  padding: 20px 5px 5px 5px;
   position: relative;
   width: 90%;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .cityName {
   text-align: center;
-  font-family: "Poppins", sans-serif;
 }
 
-.todayEmoji {
-  width: 150px;
+.currentWeatherIconWrapper {
+  position: relative;
+  width: 100%;
+  top: 10px;
+}
+
+.currentWeatherIcon {
+  width: 100%;
   position: absolute;
-  top: -33px;
-  left: 50px;
+  inset: 0;
 }
 
-.tempPerceived {
-  font-size: 20px;
+.currentTemp {
+  display: inline-block;
 }
 
 .forecast {
-  font-size: 30px;
   text-transform: capitalize;
 }
 
 .btn.btn-primary {
-  background-color: #bb5dea;
+  background-color: #bc63e9;
   color: white;
-  border-color: #bb5dea;
+  border-color: #bc63e9;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   transition: all 200ms ease-in-out;
 }
 
 .btn.btn-primary:hover {
-  background-color: #f047ff;
-  border-color: #f047ff;
+  background-color: #d383fc;
+  border-color: #d383fc;
   cursor: pointer;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .btn.btn-primary:focus {
-  outline-color: #f047ff;
+  outline-color: #d383fc;
   outline-width: 2px;
 }
 
-.lastUpdated {
-  font-size: 15px;
-}
-
-.days {
-  text-decoration: underline;
-}
-
 .row .prediction {
-  border: rgba(194, 71, 255, 1) solid 1px;
+  border: #d9bae8 solid 1px;
   border-radius: 4px;
-  background-color: #bb5dea;
+  background-color: #e3cdee;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  transition: all 200ms ease-in-out;
+  transition: all 200ms ease-out;
   margin: 5px;
 }
 
 .row .prediction:hover {
-  background-color: #f047ff;
+  background-color: #d9bae8;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   transform: scale(1.1);
   cursor: pointer;
 }
 
-.weatherEmoji {
-  font-size: 50px;
-}
-
 .highTemp {
-  font-size: 50px;
-  color: black;
+  color: rgba(0, 0, 0, 0.85);
 }
 
 .lowerTemp {
-  font-size: 30px;
-  color: white;
+  color: rgba(0, 0, 0, 0.3);
 }
 
-.celsius,
-.fahrenheit,
-.divider {
-  font-size: 20px;
+.unitControls {
+  display: inline-block;
   position: relative;
-  top: -20px;
+  top: -1.5rem;
+  margin: 0;
 }
 
 .celsius,
 .fahrenheit {
+  font-size: 1.5rem;
+  display: inline-block;
+  padding: 0 10px;
   text-decoration: none;
-  color: #bb5dea;
+  color: #bc63e9;
+}
+
+.celsius {
+  border-right: rgba(0, 0, 0, 0.3) solid 1px;
+  padding-right: 13px;
 }
 
 .celsius:hover,
 .fahrenheit:hover {
   cursor: pointer;
-  color: #f047ff;
-  text-shadow: 5px 5px 10px rgba(152, 150, 241, 0.4);
+  color: #d383fc;
 }
 
-.currentWeather .active {
-  color: #f047ff;
+.unitControls .active {
+  color: #d383fc;
   cursor: default;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .gitHubLink {
   text-decoration: none;
-  color: #bb5dea;
+  color: #bc63e9;
 }
 
 .gitHubLink:hover {
-  color: #f047ff;
+  color: #d383fc;
 }
