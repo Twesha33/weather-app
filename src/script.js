@@ -124,16 +124,46 @@ function setTempCelsius(event) {
   fahrenheitLink.classList.remove("active");
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#weather-forecast");
+
+  let days = ["Sunday", "Monday", "Tuesday", "Thursday", "Friday"];
+
+  let forecastHTML = `<div class="row text-center">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+     <div class="col prediction">
+            <div class="days">${day}</div>
+            <img
+              src="http://openweathermap.org/img/wn/10d@2x.png"
+              alt="Weather Icon"
+              class="weatherEmoji"
+              id="weather-today-icon"
+            />
+            <div class="highTemp"> 33°C</div>
+            <span class="slashDivider">/</span>
+            <span class="lowerTemp">13°C</span>
+          </div>
+  `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 let currentTempCelsius = null;
 let currentFeelTempCelsius = null;
-
-getFormattedTime();
-searchCity("Amsterdam");
-initCityListeners();
-initCurrentCityListeners();
 
 let fahrenheitLink = document.querySelector(".fahrenheit");
 fahrenheitLink.addEventListener("click", setTempFahrenheit);
 
 let celsiusLink = document.querySelector(".celsius");
 celsiusLink.addEventListener("click", setTempCelsius);
+
+getFormattedTime();
+initCityListeners();
+initCurrentCityListeners();
+displayForecast();
+searchCity("Amsterdam");

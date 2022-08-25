@@ -82,17 +82,16 @@ footer {
   text-decoration: underline;
 }
 
-.prediction {
+.row .prediction {
   border: rgba(194, 71, 255, 1) solid 1px;
   border-radius: 4px;
-  display: block;
-  margin: 0 auto;
   background-color: #bb5dea;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   transition: all 200ms ease-in-out;
+  margin: 5px;
 }
 
-.prediction:hover {
+.row .prediction:hover {
   background-color: #f047ff;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   transform: scale(1.1);
