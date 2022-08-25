@@ -1,3 +1,11 @@
+function padMinutes(minutes) {
+  let padded = `${minutes}`;
+  if (padded.length < 2) {
+    padded = "0" + minutes;
+  }
+  return padded;
+}
+
 function getFormattedTime() {
   let now = new Date();
 
@@ -18,16 +26,6 @@ function getFormattedTime() {
 
   date.innerHTML = `${day} ${hour}:${minutes}`;
 }
-
-function padMinutes(minutes) {
-  let padded = `${minutes}`;
-  if (padded.length < 2) {
-    padded = "0" + minutes;
-  }
-  return padded;
-}
-
-getFormattedTime();
 
 function displayWeather(response) {
   let changeCity = response.data.name;
@@ -66,16 +64,11 @@ function displayWeather(response) {
     .setAttribute("alt", `${weatherDescription}`);
 }
 
-let currentTempCelsius = null;
-let currentFeelTempCelsius = null;
-
 function searchCity(cityInput) {
   let apiKey = "d764fc53cc8918e14f2c2991dc43a40d";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayWeather);
 }
-
-searchCity("Amsterdam");
 
 function setCity(event) {
   event.preventDefault();
@@ -87,8 +80,6 @@ function initCityListeners() {
   let inputCity = document.querySelector("#city-form");
   inputCity.addEventListener("submit", setCity);
 }
-
-initCityListeners();
 
 function getPosition(position) {
   let latitude = position.coords.latitude;
@@ -109,25 +100,18 @@ function initCurrentCityListeners() {
   currentCity.addEventListener("click", initPosition);
 }
 
-initCurrentCityListeners();
-
 function setTempFahrenheit(event) {
   event.preventDefault();
   let fahrenheitTemp = (currentTempCelsius * 9) / 5 + 32;
   document.querySelector("#temp-today").innerHTML = Math.round(fahrenheitTemp);
-
   let fahrenheitTempFeel = Math.round((currentFeelTempCelsius * 9) / 5 + 32);
   document.querySelector(
     ".tempPerceived"
   ).innerHTML = `${fahrenheitTempFeel}°F`;
-}
 
-function initFahrenheitTemp() {
-  let fahrenheitLink = document.querySelector(".fahrenheit");
-  fahrenheitLink.addEventListener("click", setTempFahrenheit);
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
 }
-
-initFahrenheitTemp();
 
 function setTempCelsius(event) {
   event.preventDefault();
@@ -135,11 +119,21 @@ function setTempCelsius(event) {
   document.querySelector(
     ".tempPerceived"
   ).innerHTML = `${currentFeelTempCelsius}°C`;
+
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
 }
 
-function initCelsiusTemp() {
-  let celsiusLink = document.querySelector(".celsius");
-  celsiusLink.addEventListener("click", setTempCelsius);
-}
+let currentTempCelsius = null;
+let currentFeelTempCelsius = null;
 
-initCelsiusTemp();
+getFormattedTime();
+searchCity("Amsterdam");
+initCityListeners();
+initCurrentCityListeners();
+
+let fahrenheitLink = document.querySelector(".fahrenheit");
+fahrenheitLink.addEventListener("click", setTempFahrenheit);
+
+let celsiusLink = document.querySelector(".celsius");
+celsiusLink.addEventListener("click", setTempCelsius);
