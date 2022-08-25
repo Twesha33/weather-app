@@ -48,8 +48,8 @@ function displayWeather(response) {
   let weatherDescription = response.data.weather[0].description;
   document.querySelector(".forecast").innerHTML = weatherDescription;
 
-  let windSpeed = response.data.wind.speed;
-  document.querySelector("#wind-speed").innerHTML = `${windSpeed}m/s`;
+  let windSpeed = Math.round(response.data.wind.speed * 3.6);
+  document.querySelector("#wind-speed").innerHTML = `${windSpeed}km/h`;
 }
 
 function searchCity(cityInput) {

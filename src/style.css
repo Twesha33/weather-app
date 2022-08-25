@@ -37,12 +37,11 @@ footer {
   font-family: "Poppins", sans-serif;
 }
 
-.sunEmoji {
+.todayEmoji {
   font-size: 150px;
   line-height: 1;
   position: absolute;
-  top: -25px;
-  left: -25px;
+  top: -5px;
 }
 
 .tempPerceived {
