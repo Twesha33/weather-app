@@ -113,7 +113,7 @@ footer {
   color: white;
 }
 
-.celcius,
+.celsius,
 .fahrenheit,
 .divider {
   font-size: 20px;
@@ -121,13 +121,13 @@ footer {
   top: -20px;
 }
 
-.celcius,
+.celsius,
 .fahrenheit {
   text-decoration: none;
   color: #bb5dea;
 }
 
-.celcius:hover,
+.celsius:hover,
 .fahrenheit:hover {
   cursor: pointer;
   color: #f047ff;

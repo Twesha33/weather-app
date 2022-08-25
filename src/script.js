@@ -36,11 +36,13 @@ function displayWeather(response) {
     ".cityName"
   ).innerHTML = `${changeCity}, ${currentCountry}`;
 
-  let currentTemp = Math.round(response.data.main.temp);
-  document.querySelector("#temp-today").innerHTML = currentTemp;
+  currentTempCelsius = Math.round(response.data.main.temp);
+  document.querySelector("#temp-today").innerHTML = currentTempCelsius;
 
-  let currentFeelTemp = Math.round(response.data.main.feels_like);
-  document.querySelector(".tempPerceived").innerHTML = `${currentFeelTemp}°C`;
+  currentFeelTempCelsius = Math.round(response.data.main.feels_like);
+  document.querySelector(
+    ".tempPerceived"
+  ).innerHTML = `${currentFeelTempCelsius}°C`;
 
   let humidity = Math.round(response.data.main.humidity);
   document.querySelector("#humidity-perc").innerHTML = `${humidity}%`;
@@ -63,6 +65,9 @@ function displayWeather(response) {
     .querySelector("#weather-today-icon")
     .setAttribute("alt", `${weatherDescription}`);
 }
+
+let currentTempCelsius = null;
+let currentFeelTempCelsius = null;
 
 function searchCity(cityInput) {
   let apiKey = "d764fc53cc8918e14f2c2991dc43a40d";
@@ -105,3 +110,36 @@ function initCurrentCityListeners() {
 }
 
 initCurrentCityListeners();
+
+function setTempFahrenheit(event) {
+  event.preventDefault();
+  let fahrenheitTemp = (currentTempCelsius * 9) / 5 + 32;
+  document.querySelector("#temp-today").innerHTML = Math.round(fahrenheitTemp);
+
+  let fahrenheitTempFeel = Math.round((currentFeelTempCelsius * 9) / 5 + 32);
+  document.querySelector(
+    ".tempPerceived"
+  ).innerHTML = `${fahrenheitTempFeel}°F`;
+}
+
+function initFahrenheitTemp() {
+  let fahrenheitLink = document.querySelector(".fahrenheit");
+  fahrenheitLink.addEventListener("click", setTempFahrenheit);
+}
+
+initFahrenheitTemp();
+
+function setTempCelsius(event) {
+  event.preventDefault();
+  document.querySelector("#temp-today").innerHTML = currentTempCelsius;
+  document.querySelector(
+    ".tempPerceived"
+  ).innerHTML = `${currentFeelTempCelsius}°C`;
+}
+
+function initCelsiusTemp() {
+  let celsiusLink = document.querySelector(".celsius");
+  celsiusLink.addEventListener("click", setTempCelsius);
+}
+
+initCelsiusTemp();
