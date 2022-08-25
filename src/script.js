@@ -59,6 +59,10 @@ function displayWeather(response) {
       "src",
       `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`
     );
+
+  document
+    .querySelector("#weather-today-icon")
+    .setAttribute("alt", `${weatherDescription}`);
 }
 
 function searchCity(cityInput) {
