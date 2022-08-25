@@ -30,7 +30,6 @@ function padMinutes(minutes) {
 getFormattedTime();
 
 function displayWeather(response) {
-  console.log(response);
   let changeCity = response.data.name;
   let currentCountry = response.data.sys.country;
   document.querySelector(

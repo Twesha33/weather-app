@@ -21,13 +21,13 @@ footer {
 }
 
 .app {
-  border: rgba(232, 218, 239, 0.8) solid 2px;
+  border: rgba(183, 103, 224, 0.5) solid 2px;
   margin-top: 60px;
-  background-color: rgba(213, 155, 246, 0.2);
+  background-color: rgba(183, 103, 224, 0.5);
 }
 
 .currentWeather {
-  border: #d59bf6 solid 2px;
+  border: #bb5dea solid 2px;
   margin-bottom: 40px;
   position: relative;
   width: 90%;
@@ -54,34 +54,24 @@ footer {
   text-transform: capitalize;
 }
 
-.changeCityBtn {
-  background-color: #9896f1;
+.btn.btn-primary {
+  background-color: #bb5dea;
   color: white;
-  border-color: #9896f1;
+  border-color: #bb5dea;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   transition: all 200ms ease-in-out;
 }
 
-.changeCityBtn:hover {
-  background-color: #d59bf6;
-  border-color: #d59bf6;
+.btn.btn-primary:hover {
+  background-color: #f047ff;
+  border-color: #f047ff;
   cursor: pointer;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.currentCityBtn {
-  background-color: #9896f1;
-  color: white;
-  border-color: #9896f1;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  transition: all 200ms ease-in-out;
-}
-
-.currentCityBtn:hover {
-  background-color: #d59bf6;
-  border-color: #d59bf6;
-  cursor: pointer;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+.btn.btn-primary:focus {
+  outline-color: #f047ff;
+  outline-width: 2px;
 }
 
 .lastUpdated {
@@ -93,17 +83,17 @@ footer {
 }
 
 .prediction {
-  border: #d59bf6 solid 1px;
+  border: rgba(194, 71, 255, 1) solid 1px;
   border-radius: 4px;
   display: block;
   margin: 0 auto;
-  background-color: rgba(152, 150, 241, 0.1);
+  background-color: #bb5dea;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   transition: all 200ms ease-in-out;
 }
 
 .prediction:hover {
-  background-color: rgba(152, 150, 241, 0.5);
+  background-color: #f047ff;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   transform: scale(1.1);
   cursor: pointer;
@@ -120,7 +110,7 @@ footer {
 
 .lowerTemp {
   font-size: 30px;
-  color: grey;
+  color: white;
 }
 
 .celcius,
@@ -134,21 +124,21 @@ footer {
 .celcius,
 .fahrenheit {
   text-decoration: none;
-  color: #9896f1;
+  color: #bb5dea;
 }
 
 .celcius:hover,
 .fahrenheit:hover {
   cursor: pointer;
-  color: #d59bf6;
+  color: #f047ff;
   text-shadow: 5px 5px 10px rgba(152, 150, 241, 0.4);
 }
 
 .gitHubLink {
   text-decoration: none;
-  color: #9896f1;
+  color: #bb5dea;
 }
 
 .gitHubLink:hover {
-  color: #d59bf6;
+  color: #f047ff;
 }
