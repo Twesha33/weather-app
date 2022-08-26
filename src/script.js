@@ -27,39 +27,43 @@ function getFormattedTime() {
   date.innerHTML = `${day} ${hour}:${minutes}`;
 }
 
-function displayForecast() {
-  let forecastElement = document.querySelector("#weather-forecast");
+function displayForecast(response) {
+  console.log(response.data);
 
-  let days = ["Sunday", "Monday", "Tuesday", "Thursday", "Friday"];
+  // let forecastElement = document.querySelector("#weather-forecast");
 
-  let forecastHTML = `<div class="row text-center">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
-        <div class="col prediction">
-          <div class="days text-subtitle-3">${day}</div>
-          <img
-            src="https://openweathermap.org/img/wn/10d@2x.png"
-            alt="Weather Icon"
-            class="weatherEmoji"
-            id="weather-today-icon"
-          />
-          <div class="highTemp text-subtitle-1">33°C</div>
-          <div class="lowerTemp text-subtitle-2">13°C</div>
-        </div>
-      `;
-  });
+  // let days = ["Sunday", "Monday", "Tuesday", "Thursday", "Friday"];
 
-  forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;
+  // let forecastHTML = `<div class="row text-center">`;
+  // days.forEach(function (day) {
+  //   forecastHTML =
+  //     forecastHTML +
+  //     `
+  //       <div class="col prediction">
+  //         <div class="days text-subtitle-3">${day}</div>
+  //         <img
+  //           src="https://openweathermap.org/img/wn/10d@2x.png"
+  //           alt="Weather Icon"
+  //           class="weatherEmoji"
+  //           id="weather-today-icon"
+  //         />
+  //         <div class="highTemp text-subtitle-1">33°C</div>
+  //         <div class="lowerTemp text-subtitle-2">13°C</div>
+  //       </div>
+  //     `;
+  // });
+
+  // forecastHTML = forecastHTML + `</div>`;
+  // forecastElement.innerHTML = forecastHTML;
 }
 
 function getForecast(coordinates) {
-  console.log(coordinates);
+  let lat = coordinates.lat;
+  let lon = coordinates.lon;
   let apiKey = "d764fc53cc8918e14f2c2991dc43a40d";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayForecast);
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  console.log(apiUrl);
+  //axios.get(apiUrl).then(displayForecast);
 }
 
 function displayWeather(response) {
@@ -123,7 +127,6 @@ function getPosition(position) {
   let longitude = position.coords.longitude;
   let apiKey = "d764fc53cc8918e14f2c2991dc43a40d";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
-
   axios.get(apiUrl).then(displayWeather);
 }
 
@@ -173,5 +176,4 @@ celsiusLink.addEventListener("click", setTempCelsius);
 getFormattedTime();
 initCityListeners();
 initCurrentCityListeners();
-displayForecast();
 searchCity("Amsterdam");
