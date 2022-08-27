@@ -27,43 +27,65 @@ function getFormattedTime() {
   date.innerHTML = `${day} ${hour}:${minutes}`;
 }
 
+function formatForecastDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  let day = days[date.getDay()];
+
+  return day;
+}
+
 function displayForecast(response) {
-  console.log(response.data);
+  let forecast = response.data.data;
 
-  // let forecastElement = document.querySelector("#weather-forecast");
+  let forecastElement = document.querySelector("#weather-forecast");
 
-  // let days = ["Sunday", "Monday", "Tuesday", "Thursday", "Friday"];
+  let forecastHTML = `<div class="row text-center">`;
+  forecast.forEach(function (forecastDay) {
+    forecastHTML =
+      forecastHTML +
+      `
+        <div class="col prediction">
+          <div class="days text-subtitle-3">${formatForecastDay(
+            forecastDay.ts
+          )}</div>
+          <img
+            src="https://openweathermap.org/img/wn/10d@2x.png"
+            alt="Weather Icon"
+            class="weatherEmoji"
+            id="weather-today-icon"
+          />
+          <div class="highTemp text-subtitle-1">${Math.round(
+            forecastDay.max_temp
+          )}°C</div>
+          <div class="lowerTemp text-subtitle-2">${Math.round(
+            forecastDay.min_temp
+          )}°C</div>
+        </div>
+      `;
+  });
 
-  // let forecastHTML = `<div class="row text-center">`;
-  // days.forEach(function (day) {
-  //   forecastHTML =
-  //     forecastHTML +
-  //     `
-  //       <div class="col prediction">
-  //         <div class="days text-subtitle-3">${day}</div>
-  //         <img
-  //           src="https://openweathermap.org/img/wn/10d@2x.png"
-  //           alt="Weather Icon"
-  //           class="weatherEmoji"
-  //           id="weather-today-icon"
-  //         />
-  //         <div class="highTemp text-subtitle-1">33°C</div>
-  //         <div class="lowerTemp text-subtitle-2">13°C</div>
-  //       </div>
-  //     `;
-  // });
-
-  // forecastHTML = forecastHTML + `</div>`;
-  // forecastElement.innerHTML = forecastHTML;
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }
 
 function getForecast(coordinates) {
   let lat = coordinates.lat;
   let lon = coordinates.lon;
-  let apiKey = "d764fc53cc8918e14f2c2991dc43a40d";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  let apiKey = "a4557605ee874f0389081ddd9bab1806";
+  let apiUrl = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&key=${apiKey}&days=5`;
   console.log(apiUrl);
-  //axios.get(apiUrl).then(displayForecast);
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function displayWeather(response) {
