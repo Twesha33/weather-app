@@ -27,43 +27,69 @@ function getFormattedTime() {
   date.innerHTML = `${day} ${hour}:${minutes}`;
 }
 
+function formatForecastDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  let day = days[date.getDay()];
+
+  return day;
+}
+
 function displayForecast(response) {
-  console.log(response.data);
+  console.log(response.data.daily);
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#weather-forecast");
 
-  // let forecastElement = document.querySelector("#weather-forecast");
+  let forecastHTML = `<div class="row text-center">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `
+         <div class="col prediction">
+           <div class="days text-subtitle-3">${formatForecastDay(
+             forecastDay.dt
+           )}</div>
+           <img
+             src="https://openweathermap.org/img/wn/${
+               forecastDay.weather[0].icon
+             }@2x.png"
+             alt="Weather Icon"
+             class="weatherEmoji"
+             id="weather-today-icon"
+           />
+           <div class="highTemp text-subtitle-1">${Math.round(
+             forecastDay.temp.max
+           )}°C</div>
+           <div class="lowerTemp text-subtitle-2">${Math.round(
+             forecastDay.temp.min
+           )}°C</div>
+         </div>
+       `;
+    }
+  });
 
-  // let days = ["Sunday", "Monday", "Tuesday", "Thursday", "Friday"];
-
-  // let forecastHTML = `<div class="row text-center">`;
-  // days.forEach(function (day) {
-  //   forecastHTML =
-  //     forecastHTML +
-  //     `
-  //       <div class="col prediction">
-  //         <div class="days text-subtitle-3">${day}</div>
-  //         <img
-  //           src="https://openweathermap.org/img/wn/10d@2x.png"
-  //           alt="Weather Icon"
-  //           class="weatherEmoji"
-  //           id="weather-today-icon"
-  //         />
-  //         <div class="highTemp text-subtitle-1">33°C</div>
-  //         <div class="lowerTemp text-subtitle-2">13°C</div>
-  //       </div>
-  //     `;
-  // });
-
-  // forecastHTML = forecastHTML + `</div>`;
-  // forecastElement.innerHTML = forecastHTML;
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }
 
 function getForecast(coordinates) {
   let lat = coordinates.lat;
   let lon = coordinates.lon;
-  let apiKey = "d764fc53cc8918e14f2c2991dc43a40d";
+  let apiKey = "a43564c91a6c605aeb564c9ed02e3858";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
   console.log(apiUrl);
-  //axios.get(apiUrl).then(displayForecast);
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function displayWeather(response) {
