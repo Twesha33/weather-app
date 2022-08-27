@@ -60,7 +60,9 @@ function displayForecast(response) {
             forecastDay.ts
           )}</div>
           <img
-            src="https://openweathermap.org/img/wn/10d@2x.png"
+            src="https://www.weatherbit.io/static/img/icons/${
+              forecastDay.weather.icon
+            }.png"
             alt="Weather Icon"
             class="weatherEmoji"
             id="weather-today-icon"
