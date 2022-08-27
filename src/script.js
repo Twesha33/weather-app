@@ -1,9 +1,29 @@
+let currentCityData = null;
+let forecastData = null;
+let currentTempCelsius = null;
+let currentFeelTempCelsius = null;
+let isFahrenheit = false;
+const fahrenheitLink = document.querySelector(".fahrenheit");
+const celsiusLink = document.querySelector(".celsius");
+
 function padMinutes(minutes) {
   let padded = `${minutes}`;
   if (padded.length < 2) {
     padded = "0" + minutes;
   }
   return padded;
+}
+
+function getUnit() {
+  if (isFahrenheit) {
+    return "°F";
+  } else {
+    return "°C";
+  }
+}
+
+function toFahrenheit(metric) {
+  return Math.round((metric * 9) / 5 + 32);
 }
 
 function getFormattedTime() {
@@ -19,12 +39,12 @@ function getFormattedTime() {
     "Saturday",
   ];
 
-  let date = document.querySelector(".day-time");
+  let dateElement = document.querySelector(".day-time");
   let day = days[now.getDay()];
   let hour = now.getHours();
   let minutes = padMinutes(now.getMinutes());
 
-  date.innerHTML = `${day} ${hour}:${minutes}`;
+  dateElement.innerHTML = `${day} ${hour}:${minutes}`;
 }
 
 function formatForecastDay(timestamp) {
@@ -45,14 +65,22 @@ function formatForecastDay(timestamp) {
   return day;
 }
 
-function displayForecast(response) {
-  console.log(response.data.daily);
-  let forecast = response.data.daily;
+function displayForecast(data) {
+  let forecast = data.daily;
   let forecastElement = document.querySelector("#weather-forecast");
+  let unit = getUnit();
 
   let forecastHTML = `<div class="row text-center">`;
   forecast.forEach(function (forecastDay, index) {
     if (index < 5) {
+      let maxTemp = forecastDay.temp.max;
+      let minTemp = forecastDay.temp.min;
+
+      if (isFahrenheit) {
+        maxTemp = toFahrenheit(maxTemp);
+        minTemp = toFahrenheit(minTemp);
+      }
+
       forecastHTML =
         forecastHTML +
         `
@@ -69,11 +97,11 @@ function displayForecast(response) {
              id="weather-today-icon"
            />
            <div class="highTemp text-subtitle-1">${Math.round(
-             forecastDay.temp.max
-           )}°C</div>
+             maxTemp
+           )}${unit}</div>
            <div class="lowerTemp text-subtitle-2">${Math.round(
-             forecastDay.temp.min
-           )}°C</div>
+             minTemp
+           )}${unit}</div>
          </div>
        `;
     }
@@ -88,8 +116,11 @@ function getForecast(coordinates) {
   let lon = coordinates.lon;
   let apiKey = "a43564c91a6c605aeb564c9ed02e3858";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-  console.log(apiUrl);
-  axios.get(apiUrl).then(displayForecast);
+
+  axios.get(apiUrl).then(function (response) {
+    forecastData = response.data;
+    displayForecast(forecastData);
+  });
 }
 
 function displayWeather(response) {
@@ -168,12 +199,16 @@ function initCurrentCityListeners() {
 
 function setTempFahrenheit(event) {
   event.preventDefault();
-  let fahrenheitTemp = (currentTempCelsius * 9) / 5 + 32;
-  document.querySelector("#temp-today").innerHTML = Math.round(fahrenheitTemp);
-  let fahrenheitTempFeel = Math.round((currentFeelTempCelsius * 9) / 5 + 32);
-  document.querySelector(
-    "#temp-perceived"
-  ).innerHTML = `${fahrenheitTempFeel}°F`;
+  isFahrenheit = true;
+
+  let unit = getUnit();
+  document.querySelector("#temp-today").innerHTML =
+    toFahrenheit(currentTempCelsius);
+  document.querySelector("#temp-perceived").innerHTML = `${toFahrenheit(
+    currentFeelTempCelsius
+  )}${unit}`;
+
+  displayForecast(forecastData);
 
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
@@ -181,22 +216,21 @@ function setTempFahrenheit(event) {
 
 function setTempCelsius(event) {
   event.preventDefault();
+  isFahrenheit = false;
+
+  let unit = getUnit();
   document.querySelector("#temp-today").innerHTML = currentTempCelsius;
   document.querySelector(
     "#temp-perceived"
-  ).innerHTML = `${currentFeelTempCelsius}°C`;
+  ).innerHTML = `${currentFeelTempCelsius}${unit}`;
 
-  celsiusLink.classList.add("active");
+  displayForecast(forecastData);
+
   fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
 }
 
-let currentTempCelsius = null;
-let currentFeelTempCelsius = null;
-
-let fahrenheitLink = document.querySelector(".fahrenheit");
 fahrenheitLink.addEventListener("click", setTempFahrenheit);
-
-let celsiusLink = document.querySelector(".celsius");
 celsiusLink.addEventListener("click", setTempCelsius);
 
 getFormattedTime();
