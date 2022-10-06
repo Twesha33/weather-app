@@ -26,7 +26,7 @@
       <div class="app p-4">
         <div class="container mb-5">
           <form class="row" id="city-form">
-            <div class="col-8">
+            <div class="col-md-8">
               <input
                 type="text"
                 class="form-control"
@@ -34,12 +34,12 @@
                 placeholder="e.g. Amsterdam"
               />
             </div>
-            <div class="col-2">
+            <div class="col-md-2">
               <button type="submit" class="btn btn-primary w-100 changeCityBtn">
                 Search
               </button>
             </div>
-            <div class="col-2">
+            <div class="col-md-2">
               <button
                 type="submit"
                 class="btn btn-primary w-100 currentCityBtn"
@@ -55,7 +55,7 @@
 
         <div class="currentWeather mx-auto rounded-5 container">
           <div class="row">
-            <div class="col-3">
+            <div class="col-md-3 d-md-block d-none">
               <div class="currentWeatherIconWrapper">
                 <img
                   src="#"
@@ -65,7 +65,7 @@
                 />
               </div>
             </div>
-            <div class="col-4">
+            <div class="col-md-4 currentTempDisplay">
               <span class="currentTemp text-display-1" id="temp-today"></span>
               <div class="unitControls">
                 <a href="#" class="celsius active">°C</a
@@ -74,12 +74,14 @@
             </div>
             <div class="col-5">
               <div class="row">
-                <div class="col-8">Feels like:</div>
-                <div class="col-4" id="temp-perceived"></div>
-                <div class="col-8">Wind:</div>
-                <div class="col-4" id="wind-speed"></div>
-                <div class="col-8">Humidity:</div>
-                <div class="col-4" id="humidity-perc"></div>
+                <div class="d-md-block d-none">
+                  <div class="col-md-8">Feels like:</div>
+                  <div class="col-md-4" id="temp-perceived"></div>
+                  <div class="col-md-8">Wind:</div>
+                  <div class="col-md-4" id="wind-speed"></div>
+                  <div class="col-md-8">Humidity:</div>
+                  <div class="col-md-4" id="humidity-perc"></div>
+                </div>
               </div>
             </div>
           </div>

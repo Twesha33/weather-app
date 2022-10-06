@@ -84,7 +84,7 @@ function displayForecast(data) {
       forecastHTML =
         forecastHTML +
         `
-         <div class="col prediction">
+         <div class="col-md prediction">
            <div class="days text-subtitle-3">${formatForecastDay(
              forecastDay.dt
            )}</div>
